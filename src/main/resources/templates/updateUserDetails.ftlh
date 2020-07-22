@@ -5,5 +5,5 @@
 <@template.baseTemplate>
 
     <@userDetails.userDetailsForm />
-    
+
 </@template.baseTemplate>

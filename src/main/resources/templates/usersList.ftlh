@@ -5,6 +5,6 @@
 <@template.baseTemplate>
 
     <@userAdmin.usersList />
-    <@paginator.paginator url page />    
+    <@paginator.paginator url page />
 
 </@template.baseTemplate>

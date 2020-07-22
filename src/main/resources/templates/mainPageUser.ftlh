@@ -10,5 +10,5 @@
         <@menu.userMainMenu />
         <@authorisation.logoutButton />
     </#if>
-    
+
 </@template.baseTemplate>

@@ -9,5 +9,5 @@
     <#else>
         <@authorisation.logoutButton />
     </#if>
-        
+
 </@template.baseTemplate>

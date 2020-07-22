@@ -2,7 +2,7 @@
 <#import "parts/articles.ftlh" as articles>
 
 <@template.baseTemplate>
-    
+
     <@articles.articleDetails />
-        
+
 </@template.baseTemplate>

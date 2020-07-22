@@ -4,5 +4,5 @@
 <@template.baseTemplate>
 
     <@userDetails.userDetails />
-    
+
 </@template.baseTemplate>

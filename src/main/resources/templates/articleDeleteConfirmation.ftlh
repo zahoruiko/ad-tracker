@@ -12,9 +12,9 @@
                 <@template.button "GET" deleteArticleUrl "Delete" />
             </td>
             <td>
-                <@template.button "GET" "/articlesList" "Cancel" />  
+                <@template.button "GET" "/articlesList" "Cancel" />
             </td>
         </tr>
     </table>
-    
+
 </@template.baseTemplate>

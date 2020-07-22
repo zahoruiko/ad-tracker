@@ -3,8 +3,8 @@
 <#import "parts/paginator.ftlh" as paginator>
 
 <@template.baseTemplate>
-    
+
     <@visitors.visitorsList />
-    <@paginator.paginator url page />  
-        
+    <@paginator.paginator url page />
+
 </@template.baseTemplate>

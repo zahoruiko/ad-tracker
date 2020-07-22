@@ -36,10 +36,10 @@ public class AdminArticleController {
         Page<Article> page = articleRepo.findAll(pageable);
         model.addAttribute("page", page);
         model.addAttribute("url", "/admin/articlesList");
-        
+
         return "articlesList";
     }
-    
+
     @GetMapping("/addArticle")
     public String addArticleForm(@AuthenticationPrincipal User user, Model model) {
         Article article = new Article();
@@ -53,18 +53,18 @@ public class AdminArticleController {
                             @Valid Article article, 
                             BindingResult bindingResult,
                             Model model) {
-        
+
         if(bindingResult.hasErrors()) {
-            
+
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
-            
+
             model.mergeAttributes(errorsMap);
             model.addAttribute("article", article);
-            
+
             return "articleForm";
 
         } else {
-            
+
             if(article.getTheme().equals("About") || 
                article.getTheme().equals("Contacts") || 
                article.getTheme().equals("F.A.Q.") ||
@@ -90,52 +90,53 @@ public class AdminArticleController {
                     model.addAttribute("message", "Error: Article is not added. Please try later");
 
                     System.out.println("Error: Article is not added. Please try later");
-                    System.out.println("Exception: " + e);    
+                    System.out.println("Exception: " + e);
                 }
 
-                return "redirect:/admin/articlesList";            
-   
+                return "redirect:/admin/articlesList";
+
             } else {
                 article.setTheme("");
                 model.addAttribute("article", article);
-                model.addAttribute("themeError", "Please select a theme of the article");                
-                return "articleForm";    
+                model.addAttribute("themeError", "Please select a theme of the article");
+
+                return "articleForm";
             }
         }
     }
 
     @GetMapping("/editArticle/{articleId}")
     public String editArticle(@PathVariable Long articleId, Model model) {
-        
+
         Article article = articleRepo.getByArticleId(articleId);
-        
+
         if(article != null) {
             model.addAttribute("article", article);
             model.addAttribute("actionUrl", "/admin/updateArticle/" + articleId);
-            return "articleForm";            
+            return "articleForm";
         } else {
             return "redirect:/admin/articlesList";
-        }            
+        }
     }
-    
+
     @PostMapping("/updateArticle/{articleId}")
-    public String updateArticle(@AuthenticationPrincipal User user, 
-                                @PathVariable long articleId, 
-                                @Valid Article article,                     
-                                BindingResult bindingResult,                    
+    public String updateArticle(@AuthenticationPrincipal User user,
+                                @PathVariable long articleId,
+                                @Valid Article article,
+                                BindingResult bindingResult,
                                 Model model) {
-        
+
         if(bindingResult.hasErrors()) {
-            
+
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
-            
+
             model.mergeAttributes(errorsMap);
             model.addAttribute("article", article);
-            
+
             return "articleForm";
 
         } else {
-          
+ 
             if(article.getTheme().equals("About") || 
                article.getTheme().equals("Contacts") || 
                article.getTheme().equals("F.A.Q.") ||
@@ -144,7 +145,7 @@ public class AdminArticleController {
                 Timestamp nowTimestamp = new Timestamp(System.currentTimeMillis());
 
                 try {
-                    
+
                     if(articleRepo.updateArticle(user, 
                                                 articleId, 
                                                 article.getTitle(), 
@@ -155,16 +156,16 @@ public class AdminArticleController {
                         model.addAttribute("message", "Article is updated");
 
                         System.out.println("Article is added");   
-                        
+
                         return "redirect:/admin/articlesList";
 
                     } else {
-                        
+
                         model.addAttribute("message", "Article is not updated");
-                        
-                        System.out.println("Article is not updated. Please try later");                        
-                        
-                        return "redirect:/admin/articlesList";            
+
+                        System.out.println("Article is not updated. Please try later");
+
+                        return "redirect:/admin/articlesList";
                     }
                 } catch (Exception e) {
 
@@ -173,34 +174,34 @@ public class AdminArticleController {
                     model.addAttribute("message", "Error: Article is not added. Please try later");
 
                     System.out.println("Error: Article is not added. Please try later");
-                    System.out.println("Exception: " + e);    
+                    System.out.println("Exception: " + e);
                 }
 
-                return "redirect:/admin/articlesList";            
-   
+                return "redirect:/admin/articlesList";
+
             } else {
                 article.setTheme("");
                 model.addAttribute("article", article);
-                model.addAttribute("themeError", "Please select a theme of the article");                
-                return "articleForm";    
-            }              
-        } 
+                model.addAttribute("themeError", "Please select a theme of the article");
+                return "articleForm";
+            }
+        }
     }
-    
+
     @GetMapping("/deleteArticle/{articleId}")
     public String deleteArticle(@AuthenticationPrincipal User user, 
                                 @PathVariable long articleId, 
                                 Model model) {
-        
+
         Article article = articleRepo.getByArticleId(articleId);
-        
+
         if(article!=null) {
-            articleRepo.delete(article);    
+            articleRepo.delete(article);
         }
-        
+
         return "redirect:/admin/articlesList";
     }
-    
+
     @GetMapping("/articleDeleteConfirmation/{articleId}")
     public String campaignDeleteConfirmation(@PathVariable(name = "articleId", required = true) long articleId, 
                                              Model model) {
@@ -211,12 +212,12 @@ public class AdminArticleController {
            return "redirect:/admin/articlesList"; 
         }
     }
-    
+
     @GetMapping("/articleDetails/{articleId}")
     public String showInfoPage(@PathVariable long articleId, Model model) {
- 
+
         Article article = articleRepo.getByArticleId(articleId);
-        
+
         if(article!=null) {
             model.addAttribute("article", article);
             return "articleDetails";

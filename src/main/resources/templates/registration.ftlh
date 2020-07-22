@@ -4,5 +4,5 @@
 <@template.baseTemplate>
 
     <@authorisation.registrationForm />
-        
+
 </@template.baseTemplate>

@@ -186,31 +186,31 @@ public class CampaignController {
                 } else {
                     model.addAttribute("message", "Error: Campaign is not updated. Please try later");
                     return "redirect:/campaignsList";
-                }        
-                    
+                }
+
             } catch (Exception e) {
-                
+
                 e.printStackTrace();
-                
+
                 model.addAttribute("message", "Error: Campaign is not updated. Please try later");
                 System.out.println("Error: Campaign is not updated. Please try later");
                 System.out.println("Error: " + e);
                 return "redirect:/campaignsList";
-            }                    
+            }
         }
-    }                                  
-    
-    
+    }
+
+
     @Transactional
     @GetMapping("/deleteCampaign/{code}")
     public String deleteCampaign(@AuthenticationPrincipal User user, 
             @PathVariable(name = "code", required = true) String campaignCode, Model model) {
-        
+
         campaignCode = cleanCampaignCode(campaignCode);
-        
+
         if(campaignCode == null || campaignCode.isEmpty())
-           return "redirect:/campaignsList";            
-        
+           return "redirect:/campaignsList";
+
         Campaign campaign = campaignRepo.findByUserAndCode(user, campaignCode);
 
         if(campaign != null) {
@@ -219,23 +219,23 @@ public class CampaignController {
         }
 
         model.addAttribute("message", "Campaign deleted.");
-        
+
         return "redirect:/campaignsList";
     }
-    
-    
+
+
     @GetMapping("/campaignDeleteConfirmation/{code}")
     public String campaignDeleteConfirmation(@AuthenticationPrincipal User user, 
                             @PathVariable(name = "code", required = true) String campaignCode, 
                             Model model) {
-        
+
         campaignCode = cleanCampaignCode(campaignCode);
-        
+
         if(campaignCode == null || campaignCode.isEmpty())
            return "redirect:/campaignsList";
-        
+
         model.addAttribute("deleteCampaignUrl", "/deleteCampaign/" + campaignCode);
-        
+
         return "campaignDeleteConfirmation";
     }
 }

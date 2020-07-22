@@ -3,9 +3,9 @@
 <#import "parts/paginator.ftlh" as paginator>
 
 <@template.baseTemplate>
-    
+
     <@articles.articlesList />
     <@paginator.paginator url page />    
     <@template.button "GET" "/admin/addArticle" "Add article" />
-    
+
 </@template.baseTemplate>

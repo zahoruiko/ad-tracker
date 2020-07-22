@@ -2,7 +2,7 @@
 <#import "parts/campaigns.ftlh" as campaigns>
 
 <@template.baseTemplate>
-    
+
     <@campaigns.campaignDetailsForm />
-        
+
 </@template.baseTemplate>
