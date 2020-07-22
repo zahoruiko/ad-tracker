@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.example.spring</groupId>
 	<artifactId>AdsTracker</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
+	<version>0.0.8-SNAPSHOT</version>
 	<name>AdsTracker</name>
 	<description>Advertising campaigns tracker</description>
 
